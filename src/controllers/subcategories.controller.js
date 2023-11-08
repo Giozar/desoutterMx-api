@@ -16,7 +16,7 @@ export const getSubcategories = async(req, res) => {
     try {
         const subcategories = await Subcategories.find({"0.categoryId":catId});
 
-        res.json(subcategories);
+        res.json(subcategories[0]);
         
     } catch (error) {
         console.log(error);
