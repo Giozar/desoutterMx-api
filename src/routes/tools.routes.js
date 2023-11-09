@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getTool} from "../controllers/tools.controller.js";
+import { getTool, getTools} from "../controllers/tools.controller.js";
 const toolsRoute = Router();
 
 toolsRoute.get("/herramientas/:categoryId/:categoryName/:subcategoryId/:subcategoryName/p/:reference/:model", async(req, res)=>{
@@ -34,4 +34,15 @@ toolsRoute.get("/herramientas/:categoryId/:categoryName/:subcategoryId/:subcateg
     res.json(dataTool);
 } );
 
+
+toolsRoute.get("/herramientas/:categoryId/:categoryName/:subcategoryId/:subcategoryName/:subsubcategoryId/:subsubcategoryName/:subsubsubcategoryId/:subsubsubcategoryName", async(req, res) =>{
+    const product = {
+        categoryId: Number(req.params.categoryId), 
+        subcategoryId: Number(req.params.subcategoryId),
+        subsubcategoryId: Number(req.params.subsubcategoryId),
+        subsubsubcategoryId: Number(req.params.subsubsubcategoryId),
+    }
+    const dataTools = await getTools(product.categoryId, product.subcategoryId, product.subsubcategoryId, product.subsubsubcategoryId);
+    res.json(dataTools);
+} );
 export default toolsRoute;
