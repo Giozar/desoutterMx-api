@@ -14,7 +14,11 @@ subsubcategoriesRoute.get("/herramientas/:categoryId/:categoryName/:subcategoryI
 
     if(dataSubsubcategories.length <= 0){
         const dataTools = await getTools(products.categoryId, products.subcategoryId);
-        // console.log('consulta hay productos');
+        // if (dataTools.length>0) {
+        //     console.log('consulta hay productos');
+        // }else{
+        //     console.log('Consulta no hay productos');
+        // }
         res.json(dataTools);
         return 0;
     }
