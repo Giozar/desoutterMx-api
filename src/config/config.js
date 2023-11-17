@@ -14,3 +14,12 @@ export const db = {
 // puerto de comicación entre backend y frontend para cors
 // port cors
 export const clientPort = process.env.CLIENTPORT || 'http://localhost:4321';
+
+// Parametros para email
+export const Email = {
+    emailUser: process.env.EMAIL_USER,
+    emailPassword: process.env.EMAIL_PASSWORD,
+    emailPort: process.env.EMAIL_PORT,
+    emailHost: process.env.EMAIL_HOST,
+    email: process.env.EMAIL,
+};
