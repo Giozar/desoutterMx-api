@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { contact } from "../controllers/mail.controller.js";
+import { contact, quote } from "../controllers/mail.controller.js";
 
 const mailRoutes = Router();
 
 mailRoutes.post("/contacto", contact);
+mailRoutes.post(quote);
 
 export default mailRoutes;

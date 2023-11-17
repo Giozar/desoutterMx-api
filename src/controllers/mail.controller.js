@@ -61,3 +61,34 @@ export async function contact(req, res, next) {
         res.send("Message Could not be Sent");
     }
 }
+
+export async function quote(req, res, next) {
+    const {
+        floating_tool,
+        floating_quantity,
+        floating_name,
+        floating_phone,
+        floating_company,
+        floating_message,
+      } = req.body;
+    const data = {
+        floating_tool,
+        floating_quantity,
+        floating_name,
+        floating_phone,
+        floating_company,
+        floating_message,
+      }
+    try {
+
+        await mainMail(data);
+
+        // console.log(req.body);
+
+        res.send("Message Successfully Sent!");
+        
+    } catch (error) {
+        console.log(error)
+        res.send("Message Could not be Sent");
+    }
+}
