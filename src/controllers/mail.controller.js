@@ -18,26 +18,45 @@ async function contactMail(data) {
         },
     });
 
-    const props = Object.getOwnPropertyNames(data).length;
-    console.log(props);
+        let index = 0;
+        let mailBody = '';
+        let mailSubject = '';
+        for (const key in data) {
+            if (Object.hasOwnProperty.call(data, key)) {
+                const element = data[key];
+
+                if(index ===  0) {
+                    mailBody += (`<h1> Asunto : ${element}</h1> <br>`);
+                    mailSubject = element;
+                }
+
+                else if(index ===  1) {
+                    mailBody += (`<h2> Email : ${element} </h2> <br>`);
+                }
+
+                else if(index ===  2) {
+                    mailBody += (`<h2> Teléfono : ${element} </h2> <br>`);
+                }
+
+                else if(index ==  3) {
+                    mailBody += (`<h3> Nombre : ${element}</h3> <br>`);
+                }
+
+                else if(index ==  4) {
+                    mailBody += (`<h4> Compañia|Empresa : ${element}</h4> <br>`);
+                } else {
+                    mailBody += (`<h5>${key} : ${element}</h5> <br>`);
+                }
+                
+            }
+            index++;
+        }
 
     const mailOption = {
         from: Email.emailUser,
         to: Email.emailUser,
-        subject: data.subject,
-        html:
-            `
-            <b>You got a message from</b>
-            <br/><br/>
-            <h3> Email: ${data.email} </h3> <br/>
-            <h3> Phone: ${data.phone} </h3> <br/>
-            <h2> Name: ${data.fullName} </h2> <br/>
-            <p> Message: ${data.message} </p> <br/>
-            <p> informations: ${data.informations} </p> <br/>
-            <p> products: ${data.products} </p> <br/>
-            <p> offers: ${data.offers} </p> <br/>
-            <p> phoneNotifications: ${data.phoneNotifications} </p> <br/>
-            `,
+        subject: mailSubject,
+        html: mailBody,
     };
 
     try {
@@ -52,18 +71,13 @@ export async function contact(req, res, next) {
     const data = req.body;
     try {
 
-        // await contactMail(data);
-
-        // const props = Object.getOwnPropertyNames(data).length;
-        // console.log(props);
-        for (const key in data) {
-            if (Object.hasOwnProperty.call(data, key)) {
-                const element = data[key];
-                console.log(`${key} : ${element}`);
-            }
-        }
-
+        await contactMail(data);
+        
         res.send("Message Successfully Sent!");
+        
+                // calcula cunatas propiedades tiene el objeto
+                // const props = Object.getOwnPropertyNames(data).length;
+                // console.log(props);
         
     } catch (error) {
         console.log(error)
