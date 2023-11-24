@@ -73,7 +73,7 @@ export async function contact(req, res, next) {
 
         await contactMail(data);
         
-        res.send("Message Successfully Sent!");
+        res.send({ success: true, message: "Message Sent Successfully!" });
         
                 // calcula cunatas propiedades tiene el objeto
                 // const props = Object.getOwnPropertyNames(data).length;
@@ -81,6 +81,6 @@ export async function contact(req, res, next) {
         
     } catch (error) {
         console.log(error)
-        res.send("Message Could not be Sent");
+        res.status(500).json({ success: false, message: "Message Could not be Sent" });
     }
 }
