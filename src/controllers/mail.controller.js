@@ -46,7 +46,8 @@ async function contactMail(data) {
                     mailBody += (`<h4> Compañia|Empresa : ${element}</h4> <br>`);
                 } 
                 else if(index == 5) {
-                    console.log("Código reCaptcha " + element);
+                    // Aquí usamos el token del cliente
+                    // console.log("Código reCaptcha " + element);
                 
                 } else {
                     mailBody += (`<h5>${key} : ${element}</h5> <br>`);
@@ -75,8 +76,9 @@ export async function contact(req, res, next) {
     const data = req.body;
     try {
 
-        console.log(data);
-        // await contactMail(data);
+        // console.log(data);
+        
+        await contactMail(data);
         
         res.send({ success: true, message: "Message Sent Successfully!" });
         
